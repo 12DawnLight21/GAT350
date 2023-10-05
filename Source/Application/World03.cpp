@@ -1,4 +1,4 @@
-#include "World02.h"
+#include "World03.h"
 #include "Framework/Framework.h"
 #include "Input/InputSystem.h"
 
@@ -7,49 +7,20 @@
 
 namespace nc
 {
-    bool World02::Initialize()
+    bool World03::Initialize()
     {
-        //shaders //what our text files will look like but EUGH whys it so GROSS
-        const char* vertexShader =
-            "#version 430\n"
-            "layout (location=0) in vec3 position;" //IN come 3 floats at LOCATION 0
-            "layout (location=1) in vec3 color;" //IN come 3 floats at LOCATION 1
-            "layout (location=0) out vec3 ocolor;" //sends data OUT
-            "void main() {"
-            "  ocolor = color;"
-            "  gl_Position = vec4(position, 1.0);"
-            "}";
 
-        const char* fragmentShader =
-            "#version 430\n"
-            "layout (location=0) in vec3 color;"
-            "out vec4 ocolor;"
-            "void main() {"
-            "  ocolor = vec4(color, 1);"
-            "}";
-
-        GLuint vs = glCreateShader(GL_VERTEX_SHADER); //handle for our vertex shader
-        glShaderSource(vs, 1, &vertexShader, NULL); //null makes it do the whole shader
-        glCompileShader(vs);
-
-        GLuint fs = glCreateShader(GL_FRAGMENT_SHADER); //handle for our fragment shader
-        glShaderSource(fs, 1, &fragmentShader, NULL);
-        glCompileShader(fs);
-
-        GLuint program = glCreateProgram();
-        glAttachShader(program, vs); //attaches vert shader
-        glAttachShader(program, fs); //attaches frag shader
-        glLinkProgram(program);
-        glUseProgram(program); //uses the program where our shaders are stored
+        m_program = GET_RESOURCE(Program, "shaders/unlit_color.prog");
+        m_program->Use(); //sets opengl to use THIS program
 
 #ifdef INTERLEAVE
         //vertex data 
         float vertexData[] = { //the data is interleaved, making it faster
-             -0.8f, -0.8f, 0.0f, 1.0f, 1.0f, 0.0f,
-             0.8f, -0.8f, 0.0f, 1.0f, 1.0f, 0.0f,
-             0.8f,  0.8f, 0.0f, 1.0f, 1.0f, 0.0f,
-             -0.8f, 0.8f, 0.0f, 1.0f, 1.0f, 0.0f,
-             -0.8f, -0.8f, 0.0f, 1.0f, 1.0f, 0.0f
+             -0.8f, -0.8f, 0.0f, 0.0f, 1.0f, 0.0f,
+             0.8f, -0.8f, 0.0f, 0.0f, 1.0f, 0.0f,
+             0.8f,  0.8f, 0.0f, 0.0f, 1.0f, 0.0f,
+             -0.8f, 0.8f, 0.0f, 0.0f, 1.0f, 0.0f,
+             -0.8f, -0.8f, 0.0f, 0.0f, 1.0f, 0.0f
         };
 
         GLuint vbo;
@@ -119,19 +90,22 @@ namespace nc
         return true;
     }
 
-    void World02::Shutdown()
+    void World03::Shutdown()
     {
     }
 
-    void World02::Update(float dt)
+    void World03::Update(float dt)
     {
         m_angle += 180 * dt;
         m_position.x += ENGINE.GetSystem<InputSystem>()->GetKeyDown(SDL_SCANCODE_A) ? -dt : 0;
         m_position.x += ENGINE.GetSystem<InputSystem>()->GetKeyDown(SDL_SCANCODE_D) ? dt : 0;
         m_time += dt;
+
+        GLint uniform = glGetUniformLocation(m_program->m_program, "time");
+        glUniform1f(uniform, m_time);
     }
 
-    void World02::Draw(Renderer& renderer)
+    void World03::Draw(Renderer& renderer)
     {
         // pre-render
         renderer.BeginFrame();
