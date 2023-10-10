@@ -1,6 +1,5 @@
 #pragma once
 #include "Framework/World.h"
-#include "Core/Math/Vector2.h"
 #include "Renderer/Renderer.h"
 #include <vector>
 
@@ -15,14 +14,12 @@ namespace nc
 		void Draw(Renderer& renderer) override;
 
 	private:
-		float m_angle = 0;
 		float m_time;
 		float m_speed = 5.01f;
-		glm::vec3 m_position;
 
-		std::vector<vec2> m_positions;
+		Transform m_transform;
 
-		GLuint m_vao; //vertex array object //needs to be in class to exist between different methods
+		GLuint m_vao = 0;
 		res_t<Program> m_program;
 	};
 }
