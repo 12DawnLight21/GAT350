@@ -19,8 +19,11 @@ namespace nc
 
         Transform m_transform;
 
-        GLuint m_vao;
+        //GLuint m_vao; \/ does this for us now ;3
+        res_t<VertexBuffer> m_vertexBuffer;
+
         res_t<Program> m_program;
         res_t<Texture> m_texture;
+        res_t<Material> m_material;
     };
 }

@@ -45,6 +45,16 @@ namespace nc
         glTexStorage2D(m_target, 1, internalFormat, m_size.x, m_size.y);
         glTexSubImage2D(m_target, 0, 0, 0, m_size.x, m_size.y, format, GL_UNSIGNED_BYTE, data);
 
+        //this for michael
+        //glTexParameteri(m_texture, GL_TEXTURE_MIN_FILTER, GL_NEAREST); //linear less blurry
+        //glTexParameteri(m_texture, GL_TEXTURE_MAG_FILTER, GL_NEAREST); //nearest searches for nearest pixel, is blurrier?
+        
+       // glTexParameteri(m_texture, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
+        //glTexParameteri(m_texture, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT); 
+
+        //glTexParameteri(m_texture, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE); 
+       //glTexParameteri(m_texture, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE); 
+
         stbi_image_free(data);
 
         return true;
