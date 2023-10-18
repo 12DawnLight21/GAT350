@@ -1,6 +1,6 @@
 {
-  "program":"shaders/unlit_texture.prog",
-  "textures": [ "textures/llama.tga" ],
+  "program":"shaders/unlit_multi_texture.prog",
+  "textures": [ "textures/llama.tga", "textures/nomaidens.jpg" ],
   "color":[
       1,
       1,

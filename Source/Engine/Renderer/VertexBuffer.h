@@ -1,7 +1,8 @@
 #pragma once
-#include "Renderer.h"
+//#include "Renderer.h"
 #include "Framework/Resource/Resource.h"
 #include <vector>
+#include <glad/include/glad/glad.h>
 
 namespace nc
 {

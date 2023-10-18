@@ -10,13 +10,6 @@ namespace nc
     {
         m_material = GET_RESOURCE(Material, "materials/quad.mtrl");
 
-        //m_program = GET_RESOURCE(Program, "Shaders/unlit_texture.prog");
-        //m_program->Use();
-
-        //m_texture = GET_RESOURCE(Texture, "Textures/llama.jpg");
-        //m_texture->Bind();
-        //m_texture->SetActive(GL_TEXTURE0);
-
         // vertex data
         float vertexData[] = {
             -0.8f, -0.8f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f,
@@ -25,7 +18,7 @@ namespace nc
             0.8f,  0.8f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f
         };
 
-        m_vertexBuffer = GET_RESOURCE(VertexBuffer, "vb");
+        m_vertexBuffer = std::make_shared<VertexBuffer>();
         m_vertexBuffer->CreateVertexBuffer(sizeof(vertexData), 4, vertexData);
         m_vertexBuffer->SetAttribute(0, 3, 8 * sizeof(GLfloat), 0);                  // position 
         m_vertexBuffer->SetAttribute(1, 3, 8 * sizeof(GLfloat), 3 * sizeof(float));  // color 
@@ -48,7 +41,7 @@ namespace nc
         ImGui::DragFloat3("Scale", &m_transform.scale[0]);
         ImGui::End();
 
-        m_transform.rotation.z += 180 * dt;
+        //m_transform.rotation.z += 180 * dt;
 
         m_transform.position.x += ENGINE.GetSystem<InputSystem>()->GetKeyDown(SDL_SCANCODE_A) ? m_speed * -dt : 0;
         m_transform.position.x += ENGINE.GetSystem<InputSystem>()->GetKeyDown(SDL_SCANCODE_D) ? m_speed * +dt : 0;
