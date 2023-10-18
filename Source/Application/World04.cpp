@@ -11,7 +11,7 @@ namespace nc
         auto material = GET_RESOURCE(Material, "materials/grid.mtrl");
         m_model = std::make_shared<Model>();
         m_model->SetMaterial(material);
-        m_model->Load("models/cube.obj");
+        m_model->Load("models/chickito.obj");
 
         return true;
     }
@@ -25,9 +25,9 @@ namespace nc
         ENGINE.GetSystem<Gui>()->BeginFrame();
 
         ImGui::Begin("Transform");
-        ImGui::DragFloat3("Position", &m_transform.position[0]);
-        ImGui::DragFloat3("Rotation", &m_transform.rotation[0]);
-        ImGui::DragFloat3("Scale", &m_transform.scale[0]);
+        ImGui::DragFloat3("Position", &m_transform.position[0], 0.1f);
+        ImGui::DragFloat3("Rotation", &m_transform.rotation[0], 0.1f);
+        ImGui::DragFloat3("Scale", &m_transform.scale[0], 0.1f);
         ImGui::End();
 
         //m_transform.rotation.z += 180 * dt;
@@ -53,8 +53,6 @@ namespace nc
         // projectioon matrix
         glm::mat4 projection = glm::perspective(glm::radians(70.0f), 800.0f / 600.0f, 0.01f, 100.0f);
         material->GetProgram()->SetUniform("projection", projection);
-
-        ENGINE.GetSystem<Gui>()->EndFrame();
     }
 
     void World04::Draw(Renderer& renderer)
@@ -62,6 +60,8 @@ namespace nc
         // pre-render
         renderer.BeginFrame();
         // render
+        
+        //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
         m_model->Draw();
 
         ENGINE.GetSystem<Gui>()->Draw();

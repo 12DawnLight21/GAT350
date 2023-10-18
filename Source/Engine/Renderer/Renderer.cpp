@@ -61,6 +61,10 @@ namespace nc
 		glEnable(GL_DEPTH_TEST);
 		glDepthFunc(GL_LESS); //our "z buffer"
 
+		glEnable(GL_CULL_FACE);
+		glCullFace(GL_BACK);
+		glFrontFace(GL_CCW);
+
 	}
 
 	void Renderer::BeginFrame()

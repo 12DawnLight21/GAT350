@@ -1,6 +1,6 @@
 {
   "program": "shaders/lit_texture.prog",
-  "textures": [ "textures/color_grid.png" ],
+  "textures": [ "textures/chickito.png" ],
   "color":[
       1,
       1,
