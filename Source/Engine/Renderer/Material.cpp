@@ -32,7 +32,9 @@ namespace nc
 		}
 
 		//for fnaf guy lol
-		READ_DATA(document, color);
+		READ_DATA(document, diffuse);
+		READ_DATA(document, specular);
+		READ_DATA(document, shininess);
 		READ_DATA(document, tiling);
 		READ_DATA(document, offset);
 
@@ -47,12 +49,12 @@ namespace nc
 		m_program->Use();
 
 		//same with these
-		m_program->SetUniform("material.color", color);
+		m_program->SetUniform("material.diffuse", diffuse);
+		m_program->SetUniform("material.specular", specular);
+		m_program->SetUniform("material.shininess", shininess);
+
 		m_program->SetUniform("material.tiling", tiling);
 		m_program->SetUniform("material.offset", offset);
-
-		//m_program->SetUniform("light.position", lightPosition);
-		//m_program->SetUniform("light.color", lightColor);
 
 		for (size_t i = 0; i < m_textures.size(); i++)
 		{
@@ -64,17 +66,12 @@ namespace nc
 	void Material::ProcessGui()
 	{	
 		ImGui::Begin("Material");
-
-		ImGui::ColorEdit4("Color", glm::value_ptr(color)); //&color[0] = glm::value_ptr(color)
+		//&color[0] = glm::value_ptr(color)
+		ImGui::ColorEdit3("Diffuse", glm::value_ptr(diffuse)); 
+		ImGui::ColorEdit3("Specular", glm::value_ptr(specular)); 
+		ImGui::DragFloat("Shininess", &shininess, 0.1f, 2.0f, 200.0f);
 		ImGui::DragFloat2("Tiling", glm::value_ptr(tiling), 0.1f);
 		ImGui::DragFloat2("Offset", glm::value_ptr(offset), 0.1f);
-
-		ImGui::End();
-
-		ImGui::Begin("Light");
-
-		ImGui::DragFloat3("Position", glm::value_ptr(lightPosition), 0.1f);
-		ImGui::ColorEdit4("Color", glm::value_ptr(lightColor), 0.1f);
 
 		ImGui::End();
 	}

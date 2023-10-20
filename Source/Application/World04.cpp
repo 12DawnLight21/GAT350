@@ -11,7 +11,7 @@ namespace nc
         auto material = GET_RESOURCE(Material, "materials/grid.mtrl");
         m_model = std::make_shared<Model>();
         m_model->SetMaterial(material);
-        m_model->Load("models/chickito.obj");
+        m_model->Load("models/chickito.obj", glm::vec3{ 0 }, glm::vec3{ -90, 0, 0});
 
         return true;
     }
@@ -28,6 +28,15 @@ namespace nc
         ImGui::DragFloat3("Position", &m_transform.position[0], 0.1f);
         ImGui::DragFloat3("Rotation", &m_transform.rotation[0], 0.1f);
         ImGui::DragFloat3("Scale", &m_transform.scale[0], 0.1f);
+        ImGui::End();
+
+        ImGui::Begin("Light");
+
+        ImGui::SliderFloat3("Ambient Light", &m_ambientLight[0], 0.0f, 1.0f);
+        ImGui::SliderFloat3("Diffuse Light", &m_diffuseLight[0], 0.0f, 1.0f);
+        ImGui::SliderFloat3("Position", &m_lightPosition[0], -10.0f, 10.0f);
+        
+
         ImGui::End();
 
         //m_transform.rotation.z += 180 * dt;
@@ -51,8 +60,12 @@ namespace nc
         material->GetProgram()->SetUniform("view", view);
 
         // projectioon matrix
-        glm::mat4 projection = glm::perspective(glm::radians(70.0f), 800.0f / 600.0f, 0.01f, 100.0f);
+        glm::mat4 projection = glm::perspective(glm::radians(70.0f), ENGINE.GetSystem<Renderer>()->GetWidth() / (float)ENGINE.GetSystem<Renderer>()->GetHeight(), 0.01f, 100.0f);
         material->GetProgram()->SetUniform("projection", projection);
+
+        material->GetProgram()->SetUniform("ambientLight", m_ambientLight);
+        material->GetProgram()->SetUniform("light.color", m_diffuseLight);
+        material->GetProgram()->SetUniform("light.position", m_lightPosition);
     }
 
     void World04::Draw(Renderer& renderer)

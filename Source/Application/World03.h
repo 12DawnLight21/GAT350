@@ -20,7 +20,6 @@ namespace nc
 
         Transform m_transform;
 
-        //GLuint m_vao; \/ does this for us now ;3
         res_t<VertexBuffer> m_vertexBuffer;
 
         res_t<Program> m_program;

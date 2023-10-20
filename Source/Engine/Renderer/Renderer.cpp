@@ -58,12 +58,14 @@ namespace nc
 		glViewport(0, 0, width, height);
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 		glEnable(GL_DEPTH_TEST);
 		glDepthFunc(GL_LESS); //our "z buffer"
 
 		glEnable(GL_CULL_FACE);
-		glCullFace(GL_BACK);
-		glFrontFace(GL_CCW);
+		glCullFace(GL_BACK); //kill everything thats in camera range
+		glFrontFace(GL_CCW); //clock-wise
+
 
 	}
 
