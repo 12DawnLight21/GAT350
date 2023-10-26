@@ -1,5 +1,6 @@
 #pragma once
 #include "Actor.h"
+#include "Components/LightComponent.h"
 #include <list>
 
 namespace nc
@@ -28,8 +29,12 @@ namespace nc
 		T* GetActorByName(const std::string& name);
 
 		void SetGame(World* game) { m_game = game; }
+		void ProcessGui();
 
 		friend class Actor;
+
+	public:
+		glm::vec3 ambientColor{0.2f};
 
 	private:
 		World* m_game = nullptr;

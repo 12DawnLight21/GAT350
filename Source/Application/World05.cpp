@@ -12,7 +12,10 @@ namespace nc
     bool World05::Initialize()
     {
         m_scene = std::make_unique<Scene>();
+        m_scene->Load("scenes/scene.json");
+        m_scene->Initialize();
 
+        /*
         {
             auto actor = CREATE_CLASS(Actor); 
             actor->name = "actor1"; 
@@ -39,6 +42,7 @@ namespace nc
             actor->AddComponent(std::move(lightComponent)); 
             m_scene->Add(std::move(actor)); 
         }
+        */
 
         return true;
     }
@@ -52,6 +56,7 @@ namespace nc
         ENGINE.GetSystem<Gui>()->BeginFrame();
 
         m_scene->Update(dt);
+        m_scene->ProcessGui();
         //m_scnee->ProcessGui();
 
         auto actor = m_scene->GetActorByName<Actor>("actor1"); //the name we gave it earlier
@@ -63,7 +68,7 @@ namespace nc
 
         m_time += dt;
 
-        auto material = actor->GetComponent<Model>()->GetMaterial();
+        auto material = actor->GetComponent<ModelComponent>()->model->GetMaterial();
 
         material->ProcessGui();
         material->Bind();

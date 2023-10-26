@@ -30,7 +30,7 @@ int main(int argc, char* argv[])
 		ENGINE.Update();
 		quit = ENGINE.IsQuit();
 
-		world->Update(ENGINE.GetTime().GetDeltaTime());
+		world->Update(ENGINE.GetTime().GetDeltaTime()); //breaks here 10/25/23
 
 		// draw
 		world->Draw(*ENGINE.GetSystem<nc::Renderer>());
