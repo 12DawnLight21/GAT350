@@ -1,6 +1,7 @@
 #pragma once
 #include "Actor.h"
 #include "Components/LightComponent.h"
+#include "Components/CameraComponent.h"
 #include <list>
 
 namespace nc
