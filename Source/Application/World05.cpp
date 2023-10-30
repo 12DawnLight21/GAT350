@@ -15,19 +15,39 @@ namespace nc
         m_scene->Load("scenes/scene.json");
         m_scene->Initialize();
 
+        // CAMERA
         {
             auto actor = CREATE_CLASS(Actor);
             actor->name = "camera1";
-            actor->transform.position = glm::vec3{ 0, 0, 3 };
-            actor->transform.rotation = glm::radians(glm::vec3{ 0, 180, 0 });
+            actor->transform.position = glm::vec3{ 0, 0, 18 };
+            actor->transform.rotation = glm::vec3{ 0, 180, 0 };
 
             auto cameraComponent = CREATE_CLASS(CameraComponent);
-            cameraComponent->SetPerspective(70.0f, ENGINE.GetSystem<Renderer>()->GetWidth() / (float)ENGINE.GetSystem<Renderer>()->GetHeight(), 0.1f, 100.0f);
+            cameraComponent->SetPerspective(70.0f, (float)ENGINE.GetSystem<Renderer>()->GetWidth() / (float)ENGINE.GetSystem<Renderer>()->GetHeight(), 0.1f, 100.0f);
             actor->AddComponent(std::move(cameraComponent));
+
+
 
             m_scene->Add(std::move(actor));
         }
 
+        /*
+        {
+            auto actor = CREATE_CLASS(Actor);
+            actor->name = "light1";
+            actor->transform.position = glm::vec3{ 3, 3, 3 };
+            auto lightComponent = CREATE_CLASS(LightComponent);
+            lightComponent->type = LightComponent::eType::Point;
+            lightComponent->color = glm::rgbColor(glm::vec3{ randomf() * 360, 1, 1 });
+            lightComponent->intensity = 1;
+            lightComponent->range = 20;
+            lightComponent->innerAngle = 10.0f;
+            lightComponent->outerAngle = 30.0f;
+            actor->AddComponent(std::move(lightComponent));
+
+            m_scene->Add(std::move(actor));
+        }
+        */
         /*
         {
             auto actor = CREATE_CLASS(Actor); 
@@ -39,21 +59,6 @@ namespace nc
             modelComponent->model->Load("models/squirrel.glb", glm::vec3{ 0, -0.7f, 0 }, glm::vec3{ 0 }, glm::vec3{ 0.4f }); 
             actor->AddComponent(std::move(modelComponent));
             m_scene->Add(std::move(actor));
-        }
-        
-        {
-            auto actor = CREATE_CLASS(Actor); 
-            actor->name = "light1"; 
-            actor->transform.position = glm::vec3{ 3, 3, 3 }; 
-            auto lightComponent = CREATE_CLASS(LightComponent); 
-            lightComponent->type = LightComponent::eType::Point; 
-            lightComponent->color = glm::rgbColor(glm::vec3{ randomf() * 360, 1, 1 }); 
-            lightComponent->intensity = 1; 
-            lightComponent->range = 20; 
-            lightComponent->innerAngle = 10.0f; 
-            lightComponent->outerAngle = 30.0f; 
-            actor->AddComponent(std::move(lightComponent)); 
-            m_scene->Add(std::move(actor)); 
         }
         */
 

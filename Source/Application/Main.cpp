@@ -11,7 +11,24 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-	INFO_LOG("Initialize Engine...")
+	INFO_LOG("Initialize Engine...");
+
+
+	//String assignment here
+	string s1 = "are we equal";
+	string s2 = "ARE WE EQUAL";
+	
+	nc::StringUtils strUtil = nc::StringUtils();
+	cout << strUtil.toUpper(s1) << "\n";
+	cout << strUtil.toLower(s2) << "\n";
+
+	cout << strUtil.isEqualIgnoreCase(s1, s2) << "\n"; // 0 false, 1 true
+
+	cout << strUtil.createUnique(s1) << "\n";
+	cout << strUtil.createUnique(s1) << "\n";
+	cout << strUtil.createUnique(s1) << "\n";
+
+
 
 	//nc::MemoryTracker::Initialize();
 	nc::seedRandom((unsigned int)time(nullptr));
