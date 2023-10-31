@@ -26,12 +26,10 @@ namespace nc
             cameraComponent->SetPerspective(70.0f, (float)ENGINE.GetSystem<Renderer>()->GetWidth() / (float)ENGINE.GetSystem<Renderer>()->GetHeight(), 0.1f, 100.0f);
             actor->AddComponent(std::move(cameraComponent));
 
-
-
             m_scene->Add(std::move(actor));
         }
 
-        /*
+        
         {
             auto actor = CREATE_CLASS(Actor);
             actor->name = "light1";
@@ -47,20 +45,6 @@ namespace nc
 
             m_scene->Add(std::move(actor));
         }
-        */
-        /*
-        {
-            auto actor = CREATE_CLASS(Actor); 
-            actor->name = "actor1"; 
-            actor->transform.position = glm::vec3{ 0, 0, 0 }; 
-            auto modelComponent = CREATE_CLASS(ModelComponent); 
-            modelComponent->model = std::make_shared<Model>(); 
-            modelComponent->model->SetMaterial(GET_RESOURCE(Material, "materials/squirrel.mtrl")); 
-            modelComponent->model->Load("models/squirrel.glb", glm::vec3{ 0, -0.7f, 0 }, glm::vec3{ 0 }, glm::vec3{ 0.4f }); 
-            actor->AddComponent(std::move(modelComponent));
-            m_scene->Add(std::move(actor));
-        }
-        */
 
         return true;
     }

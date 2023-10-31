@@ -69,20 +69,10 @@ namespace nc
 		return false;
 	}
 
-	std::string StringUtils::createUnique(const std::string& input)
+	std::string CreateUnique(const std::string& input)
 	{
-		//if empty, dont continue
-		if (input.empty()) return "Input is empty";
+		static uint32_t unique = 0;
 
-		//if not initialized, do so now
-		if (m_unique_int == NULL) m_unique_int = 0;
-
-		//take string input append static unsigned int
-		std::string newInput = input + " " + std::to_string(m_unique_int);
-
-		//increment the int with each call
-		if (m_unique_int >= 0) m_unique_int++;
-
-		return newInput;
+		return input + std::to_string(unique++);
 	}
 }

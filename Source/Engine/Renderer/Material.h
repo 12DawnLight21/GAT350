@@ -29,7 +29,7 @@ namespace nc
 		void ProcessGui();
 
 	public:
-		uint32_t params{ 1 };
+		uint32_t params{ 0 };
 		glm::vec3 albedo{ 1 }; //or base color
 		glm::vec3 specular{ 1 }; //highlights
 		glm::vec3 emissive{ 0 }; //neon-esc lights
@@ -45,6 +45,5 @@ namespace nc
 
 	private:
 		res_t<Program> m_program;
-		//std::vector<res_t<Texture>> m_textures;
 	};
 }
