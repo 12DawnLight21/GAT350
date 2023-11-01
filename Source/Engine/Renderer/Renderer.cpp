@@ -63,7 +63,7 @@ namespace nc
 		glDepthFunc(GL_LESS); //our "z buffer"
 
 		glEnable(GL_CULL_FACE);
-		glCullFace(GL_BACK); //kill everything thats in camera range
+		glCullFace(GL_BACK);
 		glFrontFace(GL_CCW); //clock-wise
 
 
