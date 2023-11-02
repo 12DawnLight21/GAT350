@@ -55,6 +55,8 @@ namespace nc
 
     void World05::Update(float dt)
     {
+        m_time += dt;
+
         ENGINE.GetSystem<Gui>()->BeginFrame();
 
         m_scene->Update(dt);
@@ -68,12 +70,26 @@ namespace nc
         actor->transform.position.z += ENGINE.GetSystem<InputSystem>()->GetKeyDown(SDL_SCANCODE_W) ? m_speed * -dt : 0; 
         actor->transform.position.z += ENGINE.GetSystem<InputSystem>()->GetKeyDown(SDL_SCANCODE_S) ? m_speed * +dt : 0; 
 
-        m_time += dt;
-
         auto material = actor->GetComponent<ModelComponent>()->model->GetMaterial();
 
         material->ProcessGui();
         material->Bind();
+
+        // we added this, and i get a memory error somehow
+        material = GET_RESOURCE(Material, "refraction.prog");
+        if (material)
+        {
+            ImGui::Begin("Refraction");
+
+            m_refraction = 1 + std::fabs(std::sin(m_time));
+
+            ImGui::DragFloat("IOR", &m_refraction, 0.1f, 1, 3);
+            auto program = material->GetProgram();
+            program->Use();
+            program->SetUniform("ior", m_refraction);
+
+            ImGui::End();
+        }
 
         material->GetProgram()->SetUniform("ambientLight", m_ambientLight);
 

@@ -37,36 +37,16 @@ namespace nc
 		return newInput;
 	}
 
-	bool StringUtils::isEqualIgnoreCase(const std::string& s1, const std::string& s2)
+	bool StringUtils::isEqualIgnoreCase(const std::string& str1, const std::string& str2)
 	{
-		//if there's no strings to compare, dont do it
-		if (s1.empty() || s2.empty()) return "Input 1 or 2 is empty";
-
-		//copies both strings
-		std::string s1Copy = s1;
-		std::string s2Copy = s2;
-
-		//compares two strings IGNORING CASE
-		if (s1Copy.length() == s2Copy.length())
-		{
-			for (char& c : s1Copy)
-			{
-				c = std::tolower(c);
-			}
-
-			for (char& c : s2Copy)
-			{
-				c = std::tolower(c);
-			}
-
-			//returns bool if they're equal
-			if (s1Copy.compare(s2Copy) == 0)
-			{
-				return true;
-			}
+		if (str1.length() != str2.length()) {
+			return false;
 		}
+		return std::equal(str1.begin(), str1.end(), str2.begin(),
+			[](char a, char b) {
+				return tolower(a) == tolower(b);
+			});
 
-		return false;
 	}
 
 	std::string CreateUnique(const std::string& input)

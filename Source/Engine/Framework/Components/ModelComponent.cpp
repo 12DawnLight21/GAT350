@@ -47,10 +47,8 @@ namespace nc
 		READ_DATA(value, enableDepth);
 
 		std::string cullFaceName;
-		if (READ_NAME_DATA(value, "cullface", cullFaceName))
-		{
-			if (StringUtils::isEqualIgnoreCase(cullFaceName, "front")) cullface = GL_FRONT;
-			if (StringUtils::isEqualIgnoreCase(cullFaceName, "none")) cullface = GL_NONE;
-		}
+		READ_NAME_DATA(value, "cullface", cullFaceName);
+		if (StringUtils::isEqualIgnoreCase(cullFaceName, "front")) cullface = GL_FRONT;
+		if (StringUtils::isEqualIgnoreCase(cullFaceName, "none")) cullface = GL_NONE;
 	}
 }

@@ -19,7 +19,8 @@ namespace nc
 	private:
 		float m_time;
 		float m_speed = 5;
-
+		
+		float m_refraction = 1.0f;
 		glm::vec3 m_ambientLight = glm::vec3(0.2f, 0.2f, 0.2f); //or ambientColor
 	};
 }
