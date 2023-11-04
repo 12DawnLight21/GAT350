@@ -60,13 +60,11 @@ namespace nc
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 		glEnable(GL_DEPTH_TEST);
-		glDepthFunc(GL_LESS); //our "z buffer"
+		glDepthFunc(GL_LESS);
 
 		glEnable(GL_CULL_FACE);
-		glCullFace(GL_BACK);
-		glFrontFace(GL_CCW); //clock-wise
-
-
+		glCullFace(GL_FRONT);
+		glFrontFace(GL_CCW);
 	}
 
 	void Renderer::BeginFrame()

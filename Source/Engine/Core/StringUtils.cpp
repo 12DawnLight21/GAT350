@@ -1,58 +1,42 @@
 #include "StringUtils.h"
-#include <algorithm>
+#include <cctype>
 
 namespace nc
 {
-	std::string StringUtils::toUpper(const std::string& input)
-	{
-		if (input.empty()) return "Input is empty";
+    unsigned int StringUtils::uniqueCounter = 0;
 
-		//copies input string
-		std::string newInput = input;
+    string StringUtils::ToUpper(const string& input) {
+        string result = input;
+        for (char& u : result) { 
+            u = toupper(u); 
+        }
+        return result;
+    }
 
-		//converts string to uppercase
-		for (char& c : newInput)
-		{
-			c = std::toupper(c);
-		}
+    string StringUtils::ToLower(const string& input) {
+        string result = input;
+        for (char& l : result) {
+            l = tolower(l);
+        }
+        return result;
+    }
 
-		//returns the uppercase string
-		return newInput;
-	}
+    bool StringUtils::IsEqualIgnoreCase(const string& str1, const string& str2) {
+        if (str1.length() != str2.length()) {
+            return false;
+        }
 
-	std::string StringUtils::toLower(const std::string& input) 
-	{
-		if (input.empty()) return "Input is empty";
+        for (size_t i = 0; i < str1.length(); ++i) {
+            if (tolower(str1[i]) != tolower(str2[i])) {
+                return false;
+            }
+        }
 
-		//copies input string
-		std::string newInput = input;
+        return true;
+    }
 
-		//converts string to lowercase
-		for (char& c : newInput)
-		{
-			c = std::tolower(c);
-		}
-
-		//returns the lowercase string
-		return newInput;
-	}
-
-	bool StringUtils::isEqualIgnoreCase(const std::string& str1, const std::string& str2)
-	{
-		if (str1.length() != str2.length()) {
-			return false;
-		}
-		return std::equal(str1.begin(), str1.end(), str2.begin(),
-			[](char a, char b) {
-				return tolower(a) == tolower(b);
-			});
-
-	}
-
-	std::string CreateUnique(const std::string& input)
-	{
-		static uint32_t unique = 0;
-
-		return input + std::to_string(unique++);
-	}
+    string StringUtils::CreateUnique(const string& input) {
+        string uniqueString = input + to_string(uniqueCounter++);
+        return uniqueString;
+    }
 }

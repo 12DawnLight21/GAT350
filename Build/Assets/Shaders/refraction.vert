@@ -11,17 +11,17 @@ uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
 
-vec3 vreflect(vec3 i, vec3 n) //i = incident
+vec3 vreflect(vec3 i, vec3 n)
 {
-	// reflect r = i - (n *dot(n, i)) * 2
-	return i - (n * dot(n,i)) * 2;
+	//reflect r = i - (n *dot(n, i)) * 2
+	return i - (n * dot(n, i)) * 2;
 };
 
 void main()
 {
 	// transform vertex positoin/normal to world space
 	vec3 position = vec3(model * vec4(vposition, 1));
-	vec3 normal = normalize(mat3(model) * vposition);
+	vec3 normal = normalize(mat3(model) * vnormal);
 
 	// inverse of view space >> puts it in world coords
 	// last column of mat4 position

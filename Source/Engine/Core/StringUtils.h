@@ -1,14 +1,22 @@
 #pragma once
+#ifndef STRINGUTILS_H
+#define STRINGUTILS_H
+
 #include <string>
+using namespace std;
 
 namespace nc
 {
-	class StringUtils
-	{
-	public:
-		static std::string toUpper(const std::string& input);
-		static std::string toLower(const std::string& input);
-		static bool isEqualIgnoreCase(const std::string& s1, const std::string& s2);
-		static std::string createUnique(const std::string& input);
-	};
+    class StringUtils {
+    public:
+        string ToUpper(const string& input); // declares a static member function named ToUpper that takes a const string input
+        string ToLower(const string& input); // declares a static member function named ToLower that takes a const string input
+        static bool IsEqualIgnoreCase(const string& str1, const string& str2); // declares a static bool function named IsEqualIgnoreCase that takes a cont string str1
+        static string CreateUnique(const string& input); // declares a static member function named CreateUnique that takes a const string input
+
+    private:
+        static unsigned int uniqueCounter; //creates a static int variable names uniqueCounter
+    };
+
+#endif // STRINGUTILS_H
 }

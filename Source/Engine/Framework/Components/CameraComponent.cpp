@@ -13,7 +13,7 @@ namespace nc
 		{
 			// set aspect with renderer width / renderer height (make sure it is a floating point division)
 			// aspect = width / height;
-			aspect = Renderer().GetWidth() / Renderer().GetHeight();
+			aspect = static_cast<float>(ENGINE.GetSystem<Renderer>()->GetWidth()) / static_cast<float>(ENGINE.GetSystem<Renderer>()->GetHeight());
 		}
 
 		return true;
@@ -48,7 +48,7 @@ namespace nc
 	{
 		// set view matrix with glm::lookAt function
 		// view = glm::lookAt(<parameters>)
-		view = glm::lookAt(m_owner->transform.position, (m_owner->transform.position + m_owner->transform.Forward()), up);
+		view = glm::lookAt(eye, center, up);
 	}
 
 	void CameraComponent::SetProgram(res_t<Program> program)
@@ -65,7 +65,7 @@ namespace nc
 		ImGui::Begin("Camera");
 
 		//mins n maxes might need changed
-		ImGui::DragFloat("Field Of Vision", &fov, 0.1f, 1, 180);
+		ImGui::DragFloat("Field of View (FOV)", &fov, 0.1f, 0.1f, 179.9f);
 		ImGui::DragFloat("Aspect", &aspect, 0.1f, 1, 90);
 		ImGui::DragFloat("Near", &near, 0.1f, 0, 1);
 		ImGui::DragFloat("Far", &far, 0.1f, 0, 100);

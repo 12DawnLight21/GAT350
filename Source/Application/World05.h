@@ -6,10 +6,8 @@
 
 namespace nc
 {
-
 	class World05 : public World
 	{
-
 	public:
 		bool Initialize() override;
 		void Shutdown() override;

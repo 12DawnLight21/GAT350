@@ -19,7 +19,6 @@ namespace nc
 		{
 			model->SetMaterial(GET_RESOURCE(Material, materialName));
 		}
-
 		return true;
 	}
 
@@ -48,7 +47,13 @@ namespace nc
 
 		std::string cullFaceName;
 		READ_NAME_DATA(value, "cullface", cullFaceName);
-		if (StringUtils::isEqualIgnoreCase(cullFaceName, "front")) cullface = GL_FRONT;
-		if (StringUtils::isEqualIgnoreCase(cullFaceName, "none")) cullface = GL_NONE;
+		if (StringUtils::IsEqualIgnoreCase(cullFaceName, "front"))
+		{
+			cullface = GL_FRONT;
+		}
+		if (StringUtils::IsEqualIgnoreCase(cullFaceName, "none"))
+		{
+			cullface = GL_NONE;
+		}
 	}
 }

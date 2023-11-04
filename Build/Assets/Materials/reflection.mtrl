@@ -1,12 +1,12 @@
 {
   "program": "shaders/reflection.prog",
-  "cubemap": "night_cubemap",
+  "cubemap": "storforsen_cubemap",
   "cubemaps": [
-    "textures/night_cubemap/posx.jpg",
-    "textures/night_cubemap/negx.jpg",
-    "textures/night_cubemap/posy.jpg",
-    "textures/night_cubemap/negy.jpg",
-    "textures/night_cubemap/posz.jpg",
-    "textures/night_cubemap/negz.jpg"
+    "textures/storforsen_cubemap/posx.jpg",
+    "textures/storforsen_cubemap/negx.jpg",
+    "textures/storforsen_cubemap/posy.jpg",
+    "textures/storforsen_cubemap/negy.jpg",
+    "textures/storforsen_cubemap/posz.jpg",
+    "textures/storforsen_cubemap/negz.jpg"
   ]
 }

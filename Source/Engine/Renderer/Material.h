@@ -19,8 +19,6 @@ namespace nc
 		const uint32_t EMISSIVE_TEXTURE_MASK = (1 << 3); //01000
 		const uint32_t CUBEMAP_TEXTURE_MASK = (1 << 4); //10000
 
-		// sets them like 00001 - 11111
-
 	public:
 		virtual bool Create(std::string filename, ...) override;
 
@@ -36,8 +34,8 @@ namespace nc
 		glm::vec3 emissive{ 0 }; //neon-esc lights
 		float shininess = 2;
 
-		glm::vec2 tiling{ 1 , 1 };
-		glm::vec2 offset{ 0 , 0 };
+		glm::vec2 tiling{ 1, 1 };
+		glm::vec2 offset{ 0, 0 };
 
 		res_t<Texture> albedoTexture;
 		res_t<Texture> specularTexture; 
@@ -47,5 +45,6 @@ namespace nc
 
 	private:
 		res_t<Program> m_program;
+		std::vector<res_t<Texture>> m_textures;
 	};
 }
