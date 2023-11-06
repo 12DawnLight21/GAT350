@@ -1,6 +1,7 @@
 #pragma once
 #include <cmath>
 #include <utility>
+#include <glm/glm/gtc/quaternion.hpp>
 
 namespace nc
 {
@@ -46,4 +47,10 @@ namespace nc
 	{
 		return (a * (1.0f - t)) + (b * t);
 	}
+
+	// convert euler angles (degrees) to a quaternion
+	glm::vec3 QuaternionToEuler(const glm::quat& q);
+
+	// convert quaternion to euler angles (degrees)
+	glm::quat EulerToQuaternion(const glm::vec3& euler);
 }

@@ -36,12 +36,20 @@ namespace nc
             auto actor = CREATE_CLASS(Actor);
             actor->name = "camera1";
             actor->transform.position = glm::vec3{ 0, 3, 20 };
-            actor->transform.rotation = glm::radians(glm::vec3{ 0, 10313.2, 0 });
+            actor->transform.rotation = glm::radians(glm::vec3{ 0, 180, 0 });
 
             auto cameraComponent = CREATE_CLASS(CameraComponent);
             cameraComponent->SetPerspective(70.0f, ENGINE.GetSystem<Renderer>()->GetWidth() / (float)ENGINE.GetSystem<Renderer>()->GetHeight(), 0.1f, 100.0f);
             actor->AddComponent(std::move(cameraComponent));
 
+            auto cameraController = CREATE_CLASS(CameraController);
+            cameraController->speed = 5;
+            cameraController->sensitivity = 0.5f;
+            cameraController->m_owner = actor.get();
+            cameraController->Initialize();
+            
+            actor->AddComponent(std::move(cameraController));
+            
             m_scene->Add(std::move(actor));
         }
 
@@ -66,7 +74,8 @@ namespace nc
         actor->transform.position.z += ENGINE.GetSystem<InputSystem>()->GetKeyDown(SDL_SCANCODE_W) ? m_speed * -dt : 0; 
         actor->transform.position.z += ENGINE.GetSystem<InputSystem>()->GetKeyDown(SDL_SCANCODE_S) ? m_speed * +dt : 0; 
 
-        auto material = actor->GetComponent<ModelComponent>()->model->GetMaterial();
+        
+        auto material = actor->GetComponent<ModelComponent>()->material;
 
         material->ProcessGui();
         material->Bind();
@@ -87,9 +96,10 @@ namespace nc
         }
 
         material->GetProgram()->SetUniform("ambientLight", m_ambientLight);
+        
 
         m_time += dt;
-
+         
         ENGINE.GetSystem<Gui>()->EndFrame();
     }
 

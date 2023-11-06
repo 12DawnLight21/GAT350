@@ -60,7 +60,7 @@ namespace nc
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 		glEnable(GL_DEPTH_TEST);
-		glDepthFunc(GL_LESS);
+		glDepthFunc(GL_LEQUAL); //hope this works
 
 		glEnable(GL_CULL_FACE);
 		glCullFace(GL_FRONT);
@@ -69,6 +69,7 @@ namespace nc
 
 	void Renderer::BeginFrame()
 	{
+		//SDL_RenderClear(m_renderer);
 		glClearColor(0, 0, 0, 1);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
@@ -76,6 +77,7 @@ namespace nc
 	void Renderer::EndFrame()
 	{
 		SDL_GL_SwapWindow(m_window);
+		//SDL_RenderPresent(m_renderer);
 	}
 
 	void Renderer::SetColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a)
