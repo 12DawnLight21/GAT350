@@ -1,6 +1,5 @@
 #include "World05.h"
 
-
 #include "Framework/Framework.h"
 #include "Input/InputSystem.h"
 
@@ -15,14 +14,13 @@ namespace nc
         m_scene->Load("Scenes/scene.json");
         m_scene->Initialize();
 
-        // LIGHT
         {
             auto actor = CREATE_CLASS(Actor);
             actor->name = "light1";
             actor->transform.position = glm::vec3{ 3, 3, 3 };
             auto lightComponent = CREATE_CLASS(LightComponent);
             lightComponent->type = LightComponent::eType::Point;
-            lightComponent->color = glm::rgbColor(glm::vec3{ randomf() * 360, 1, 1 }); //glm::vec3{ 1, 1, 1 }; //
+            lightComponent->color = glm::vec3{ 1, 1, 1 }; //glm::rgbColor(glm::vec3{ randomf() * 360, 1, 1 });
             lightComponent->intensity = 1;
             lightComponent->range = 20;
             lightComponent->innerAngle = 10.0f;
@@ -31,11 +29,10 @@ namespace nc
             m_scene->Add(std::move(actor));
         }
 
-        // CAMERA
         {
             auto actor = CREATE_CLASS(Actor);
             actor->name = "camera1";
-            actor->transform.position = glm::vec3{ 0, 3, 20 };
+            actor->transform.position = glm::vec3{ 0, 0.4, 4 };
             actor->transform.rotation = glm::radians(glm::vec3{ 0, 180, 0 });
 
             auto cameraComponent = CREATE_CLASS(CameraComponent);
@@ -44,12 +41,21 @@ namespace nc
 
             auto cameraController = CREATE_CLASS(CameraController);
             cameraController->speed = 5;
-            cameraController->sensitivity = 0.5f;
+            cameraController->sensitivity = 0.5;
             cameraController->m_owner = actor.get();
             cameraController->Initialize();
-            
             actor->AddComponent(std::move(cameraController));
-            
+
+            m_scene->Add(std::move(actor));
+        }
+
+        for (int i = 0; i < 10; i++)
+        {
+            auto actor = CREATE_CLASS_BASE(Actor, "tree");
+            actor->name = StringUtils::CreateUnique("tree");
+            actor->transform.position = glm::vec3{ randomf(-10, 10), 0, randomf(-10, 10) };
+            actor->transform.scale = glm::vec3{ randomf(0.5f, 3.0f), randomf(0.5, 3.0f), 0 };
+            actor->Initialize();
             m_scene->Add(std::move(actor));
         }
 
@@ -67,14 +73,19 @@ namespace nc
         m_scene->Update(dt);
         m_scene->ProcessGui();
 
-        auto actor = m_scene->GetActorByName<Actor>("ogre1"); //renamed ator1 to ogre
 
-        actor->transform.position.x += ENGINE.GetSystem<InputSystem>()->GetKeyDown(SDL_SCANCODE_A) ? m_speed * -dt : 0;
-        actor->transform.position.x += ENGINE.GetSystem<InputSystem>()->GetKeyDown(SDL_SCANCODE_D) ? m_speed * +dt : 0; 
-        actor->transform.position.z += ENGINE.GetSystem<InputSystem>()->GetKeyDown(SDL_SCANCODE_W) ? m_speed * -dt : 0; 
-        actor->transform.position.z += ENGINE.GetSystem<InputSystem>()->GetKeyDown(SDL_SCANCODE_S) ? m_speed * +dt : 0; 
+        auto actor = m_scene->GetActorByName<Actor>("Ogre");
+        m_scene->GetActorByName<Actor>("Ogre Refract");
+        m_scene->GetActorByName<Actor>("Ogre Reflect");
 
-        
+        //m_transform.rotation.z += 180 * dt;
+
+        //actor->transform.position.x += ENGINE.GetSystem<InputSystem>()->GetKeyDown(SDL_SCANCODE_A) ? m_speed * -dt : 0;
+        //actor->transform.position.x += ENGINE.GetSystem<InputSystem>()->GetKeyDown(SDL_SCANCODE_D) ? m_speed * +dt : 0;
+        //actor->transform.position.z += ENGINE.GetSystem<InputSystem>()->GetKeyDown(SDL_SCANCODE_W) ? m_speed * -dt : 0;
+        //actor->transform.position.z += ENGINE.GetSystem<InputSystem>()->GetKeyDown(SDL_SCANCODE_S) ? m_speed * +dt : 0;
+
+
         auto material = actor->GetComponent<ModelComponent>()->material;
 
         material->ProcessGui();
@@ -85,7 +96,7 @@ namespace nc
         {
             ImGui::Begin("Refraction");
 
-            //m_refraction = 1.0f + std::fabs(std::sin(m_time));
+            m_refraction = 1.0f + std::fabs(std::sin(m_time));
 
             ImGui::DragFloat("IOR", &m_refraction, 0.01f, 1, 3);
             auto program = material->GetProgram();
@@ -95,11 +106,8 @@ namespace nc
             ImGui::End();
         }
 
-        material->GetProgram()->SetUniform("ambientLight", m_ambientLight);
-        
-
         m_time += dt;
-         
+
         ENGINE.GetSystem<Gui>()->EndFrame();
     }
 

@@ -5,19 +5,16 @@ INFO: Factory.h(76) Class registered: CameraController
 INFO: Factory.h(76) Class registered: CameraComponent
 INFO: Factory.h(76) Class registered: Actor
 INFO: Main.cpp(14) Initialize Engine...
-WARNING: Texture.cpp(35) Could not create surface: textures/ogre_specular.bmp
-WARNING: ResourceManager.h(45) Could not create resource: textures/ogre_specular.bmp
-WARNING: Program.cpp(165) Could not find uniform location: material.params
-WARNING: Program.cpp(165) Could not find uniform location: material.albedo
-WARNING: Program.cpp(165) Could not find uniform location: material.specular
-WARNING: Program.cpp(165) Could not find uniform location: material.emissive
-WARNING: Program.cpp(165) Could not find uniform location: material.shininess
-WARNING: Program.cpp(165) Could not find uniform location: material.tiling
-WARNING: Program.cpp(165) Could not find uniform location: material.offset
+INFO: Factory.h(84) Prototype Class registered: tree
+WARNING: Program.cpp(165) Could not find uniform location: ior
+WARNING: Program.cpp(165) Could not find uniform location: numLights
+WARNING: Program.cpp(165) Could not find uniform location: ambientLight
+WARNING: Program.cpp(165) Could not find uniform location: numLights
 WARNING: Program.cpp(165) Could not find uniform location: ambientLight
 WARNING: Program.cpp(165) Could not find uniform location: numLights
 WARNING: Program.cpp(165) Could not find uniform location: ambientLight
 WARNING: Program.cpp(165) Could not find uniform location: numLights
+WARNING: Program.cpp(165) Could not find uniform location: ambientLight
 WARNING: Program.cpp(165) Could not find uniform location: numLights
 WARNING: Program.cpp(165) Could not find uniform location: ambientLight
 WARNING: Program.cpp(165) Could not find uniform location: material.params
@@ -33,8 +30,27 @@ WARNING: Program.cpp(165) Could not find uniform location: material.albedo
 WARNING: Program.cpp(165) Could not find uniform location: material.specular
 WARNING: Program.cpp(165) Could not find uniform location: material.emissive
 WARNING: Program.cpp(165) Could not find uniform location: material.shininess
-WARNING: Program.cpp(165) Could not find uniform location: material.tiling
-WARNING: Program.cpp(165) Could not find uniform location: material.offset
+WARNING: Program.cpp(165) Could not find uniform location: material.params
+WARNING: Program.cpp(165) Could not find uniform location: material.albedo
+WARNING: Program.cpp(165) Could not find uniform location: material.specular
+WARNING: Program.cpp(165) Could not find uniform location: material.emissive
+WARNING: Program.cpp(165) Could not find uniform location: material.shininess
+WARNING: Program.cpp(165) Could not find uniform location: lights[0].type
+WARNING: Program.cpp(165) Could not find uniform location: lights[0].position
+WARNING: Program.cpp(165) Could not find uniform location: lights[0].direction
+WARNING: Program.cpp(165) Could not find uniform location: lights[0].color
+WARNING: Program.cpp(165) Could not find uniform location: lights[0].intensity
+WARNING: Program.cpp(165) Could not find uniform location: lights[0].range
+WARNING: Program.cpp(165) Could not find uniform location: lights[0].innerAngle
+WARNING: Program.cpp(165) Could not find uniform location: lights[0].outerAngle
+WARNING: Program.cpp(165) Could not find uniform location: lights[0].type
+WARNING: Program.cpp(165) Could not find uniform location: lights[0].position
+WARNING: Program.cpp(165) Could not find uniform location: lights[0].direction
+WARNING: Program.cpp(165) Could not find uniform location: lights[0].color
+WARNING: Program.cpp(165) Could not find uniform location: lights[0].intensity
+WARNING: Program.cpp(165) Could not find uniform location: lights[0].range
+WARNING: Program.cpp(165) Could not find uniform location: lights[0].innerAngle
+WARNING: Program.cpp(165) Could not find uniform location: lights[0].outerAngle
 WARNING: Program.cpp(165) Could not find uniform location: lights[0].type
 WARNING: Program.cpp(165) Could not find uniform location: lights[0].position
 WARNING: Program.cpp(165) Could not find uniform location: lights[0].direction

@@ -5,8 +5,8 @@
 			"name": "skybox",
 			"persistent": true,
 			"transform": {
-				"position": [ 0, 0, 0 ],
-				"scale": [ 2, 2, 2 ],
+				"position": [ 0, 0, 1 ],
+				"scale": [ 1, 1, 1 ],
 				"rotation": [ 0, 0, 0 ]
 			},
 			"components": [
@@ -14,17 +14,18 @@
 					"type": "ModelComponent",
 					"modelName": "models/cube.obj",
 					"materialName": "materials/skybox.mtrl",
-					"enableDepth": true,
+					"enableDepth": false,
 					"cullface": "front"
 				}
 			]
 		},
 		{
 			"type": "Actor",
-			"name": "ogre1",
+			"name": "Ogre",
 			"persistent": true,
+			"active": false,
 			"transform": {
-				"position": [ 0, 3, 17 ],
+				"position": [ 0, 0, 1 ],
 				"scale": [ 1, 1, 1 ],
 				"rotation": [ 0, 0, 0 ]
 			},
@@ -32,17 +33,18 @@
 				{
 					"type": "ModelComponent",
 					"modelName": "models/ogre.obj",
-					"materialName": "Materials/refraction.mtrl",
+					"materialName": "Materials/shrek.mtrl",
 					"cullface": "back"
 				}
 			]
 		},
 		{
 			"type": "Actor",
-			"name": "ogre2",
+			"name": "Ogre Reflect",
 			"persistent": true,
+			"active": false,
 			"transform": {
-				"position": [ 1, 3, 17 ],
+				"position": [ 0, 0, 1 ],
 				"scale": [ 1, 1, 1 ],
 				"rotation": [ 0, 0, 0 ]
 			},
@@ -57,10 +59,11 @@
 		},
 		{
 			"type": "Actor",
-			"name": "ogre3",
+			"name": "Ogre Refract",
 			"persistent": true,
+			"active": false,
 			"transform": {
-				"position": [ -1, 3, 17 ],
+				"position": [ 0, 0, 1 ],
 				"scale": [ 1, 1, 1 ],
 				"rotation": [ 0, 0, 0 ]
 			},
@@ -68,7 +71,46 @@
 				{
 					"type": "ModelComponent",
 					"modelName": "models/ogre.obj",
-					"materialName": "Materials/phong.mtrl",
+					"materialName": "Materials/refraction.mtrl",
+					"cullface": "back"
+				}
+			]
+		},
+		{
+			"type": "Actor",
+			"name": "sprite",
+			"persistent": true,
+			"active": true,
+			"transform": {
+				"position": [ -1, 0, 1 ],
+				"scale": [ 1, 1, 1 ],
+				"rotation": [ 0, 0, 0 ]
+			},
+			"components": [
+				{
+					"type": "ModelComponent",
+					"modelName": "models/quad.obj",
+					"materialName": "Materials/sprite.mtrl",
+					"cullface": "back"
+				}
+			]
+		},
+		{
+			"type": "Actor",
+			"name": "tree",
+			"persistent": true,
+			"active": true,
+			"prototype": true,
+			"transform": {
+				"position": [ 1, 0, 1 ],
+				"scale": [ 1, 1, 1 ],
+				"rotation": [ 0, 0, 0 ]
+			},
+			"components": [
+				{
+					"type": "ModelComponent",
+					"modelName": "models/quad.obj",
+					"materialName": "Materials/tree.mtrl",
 					"cullface": "back"
 				}
 			]
