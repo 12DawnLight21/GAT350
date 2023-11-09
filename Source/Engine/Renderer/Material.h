@@ -29,19 +29,19 @@ namespace nc
 
 	public:
 		uint32_t params{ 0 };
-		glm::vec3 albedo{ 1 }; //or base color
-		glm::vec3 specular{ 1 }; //highlights
-		glm::vec3 emissive{ 0 }; //neon-esc lights
+		glm::vec3 albedo{ 1 };
+		glm::vec3 specular{ 1 };
+		glm::vec3 emissive{ 0 };
 		float shininess = 2;
 
 		glm::vec2 tiling{ 1, 1 };
 		glm::vec2 offset{ 0, 0 };
 
 		res_t<Texture> albedoTexture;
-		res_t<Texture> specularTexture; 
-		res_t<Texture> normalTexture; 
-		res_t<Texture> emissiveTexture; 
-		res_t<Texture> cubemapTexture; 
+		res_t<Texture> specularTexture;
+		res_t<Texture> normalTexture;
+		res_t<Texture> emissiveTexture;
+		res_t<Texture> cubemapTexture;
 
 	private:
 		res_t<Program> m_program;
