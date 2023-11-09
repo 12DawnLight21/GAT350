@@ -10,9 +10,10 @@ namespace nc
 
 		bool Initialize() override;
 		void Update(float dt) override;
+
 		void ProcessGui() override;
 
 	public:
-
+		glm::vec3 euler{ 0 }; //the angle
 	};
 }

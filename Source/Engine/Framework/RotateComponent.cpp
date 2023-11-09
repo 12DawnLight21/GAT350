@@ -1,18 +1,35 @@
 #include "RotateComponent.h"
+#include "Framework/Actor.h"
 
-bool nc::RotateComponent::Initialize()
+
+namespace nc
 {
-	return false;
-}
+    CLASS_DEFINITION(RotateComponent)
 
-void nc::RotateComponent::Update(float dt)
-{
-	//m_owner->transform.euler += euler * dt;
+        bool RotateComponent::Initialize()
+    {
+        return true;
+    }
 
-	//glm::quat rotation = EulerToQuaternion(euler * dt);
-	//m_owner->transform.rotation = m_owner->transform.rotation * rotation;
-}
+    void RotateComponent::Update(float dt)
+    {
+        m_owner->transform.euler += euler * dt;
 
-void nc::RotateComponent::ProcessGui()
-{
+        // Euler angles (in degrees) to quaternion
+        glm::quat rotation = EulerToQuaternion(euler * dt);
+
+        // Apply the rotation
+        m_owner->transform.rotation = m_owner->transform.rotation * rotation;
+
+    }
+    void RotateComponent::ProcessGui()
+    {
+        ImGui::DragFloat3("Rotation", glm::value_ptr(euler));
+    }
+
+    void RotateComponent::Read(const json_t& value)
+    {
+        READ_NAME_DATA(value, "rotation", euler);
+    }
+
 }
