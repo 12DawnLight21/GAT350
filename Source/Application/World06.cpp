@@ -45,6 +45,7 @@ namespace nc
         // set postprocess gui
         ImGui::Begin("Post-Process");
         ImGui::SliderFloat("Blend", &m_blend, 0, 1);
+
         bool effect = m_params & GRAYSCALE_MASK;
         if (ImGui::Checkbox("Grayscale", &effect))
         {
@@ -55,10 +56,29 @@ namespace nc
         {
             (effect) ? m_params |= COLORTINT_MASK : m_params ^= COLORTINT_MASK;
         }
+        if (effect)
+        {
+            ImGui::ColorEdit3("Tint", glm::value_ptr(m_tint));
+        }
         effect = m_params & INVERT_MASK;
         if (ImGui::Checkbox("Invert", &effect))
         {
             (effect) ? m_params |= INVERT_MASK : m_params ^= INVERT_MASK;
+        }
+        effect = m_params & GRAIN_MASK;
+        if (ImGui::Checkbox("Grain", &effect))
+        {
+            (effect) ? m_params |= GRAIN_MASK : m_params ^= GRAIN_MASK;
+        }
+        effect = m_params & SCANLINE_MASK;
+        if (ImGui::Checkbox("Snan Line", &effect))
+        {
+            (effect) ? m_params |= SCANLINE_MASK : m_params ^= SCANLINE_MASK;
+        }
+        effect = m_params & KERNAL_MASK;
+        if (ImGui::Checkbox("Outline", &effect))
+        {
+            (effect) ? m_params |= KERNAL_MASK : m_params ^= KERNAL_MASK;
         }
         ImGui::End();
 
@@ -69,6 +89,7 @@ namespace nc
             program->Use();
             program->SetUniform("blend", m_blend);
             program->SetUniform("params", m_params);
+            program->SetUniform("tint", m_tint);
         }
 
         ENGINE.GetSystem<Gui>()->EndFrame();
