@@ -71,12 +71,12 @@ namespace nc
             (effect) ? m_params |= GRAIN_MASK : m_params ^= GRAIN_MASK;
         }
         effect = m_params & SCANLINE_MASK;
-        if (ImGui::Checkbox("Snan Line", &effect))
+        if (ImGui::Checkbox("Scanline", &effect))
         {
             (effect) ? m_params |= SCANLINE_MASK : m_params ^= SCANLINE_MASK;
         }
         effect = m_params & KERNAL_MASK;
-        if (ImGui::Checkbox("Outline", &effect))
+        if (ImGui::Checkbox("Kernal", &effect))
         {
             (effect) ? m_params |= KERNAL_MASK : m_params ^= KERNAL_MASK;
         }

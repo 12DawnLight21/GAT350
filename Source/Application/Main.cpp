@@ -20,8 +20,8 @@ int main(int argc, char* argv[])
 	nc::setFilePath("assets");
 
 	ENGINE.Initialize();
-
-	auto world = make_unique<nc::World06>();
+	
+	auto world = make_unique<nc::World07>();
 	world->Initialize();
 
 	// main loop
