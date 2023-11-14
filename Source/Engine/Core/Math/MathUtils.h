@@ -48,6 +48,35 @@ namespace nc
 		return (a * (1.0f - t)) + (b * t);
 	}
 
+	template<typename T>
+	constexpr T SetBits(T a, T b)
+	{
+		// | = OR, 1 is returned if either have a 1
+		return a | b;
+	}
+
+	template<typename T>
+	constexpr T ClearBits(T a, T b)
+	{
+		// & = AND, 1 is returned only if both are 1
+		// ~ = NOT, inverts all bits in it
+		return a & ~b;
+	}
+
+	template<typename T>
+	constexpr T TestBits(T a, T b)
+	{
+		// does the & of a and b == b (unchanged)?
+		return (a & b) == b;
+	}
+
+	template<typename T>
+	constexpr T ToggleBits(T a, T b)
+	{
+		// ^ = XOR, 1 is returned if the numbers are DIFFERENT
+		return a ^ b;
+	}
+
 	// convert euler angles (degrees) to a quaternion
 	glm::vec3 QuaternionToEuler(const glm::quat& q);
 
