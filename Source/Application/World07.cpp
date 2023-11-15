@@ -22,11 +22,18 @@ namespace nc
         framebuffer->CreateDepthBuffer(texture);
         ADD_RESOURCE("depth_buffer", framebuffer);
 
-        //set teaxture to debug sprite
+        //set texture to debug sprite
         auto material = GET_RESOURCE(Material, "Materials/sprite.mtrl");
         if (material)
         {
             material->albedoTexture = texture;
+        }
+
+
+        auto materials = GET_RESOURCES(Material);
+        for (auto material : materials)
+        {
+            material->depthTexture = texture;
         }
 
         return true;
@@ -105,8 +112,12 @@ namespace nc
         auto models = m_scene->GetComponents<ModelComponent>();
         for (auto model : models)
         {
-            program->SetUniform("model", model->m_owner->transform.GetMatrix());
-            model->model->Draw();
+            if (model->castShadow)
+            {
+                //glCullFace(GL_FRONT);
+                program->SetUniform("model", model->m_owner->transform.GetMatrix());
+                model->model->Draw();
+            } continue;
         }
 
         framebuffer->Unbind();
