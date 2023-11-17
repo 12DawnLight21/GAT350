@@ -18,6 +18,61 @@ in layout(location = 3) vec4 fshadowcoord;
 
 out layout(location = 0) vec4 ocolor;
 
+varying vec3 normal;
+
+void main()
+{
+	// https://github.com/mchamberlain/Cel-Shader/blob/master/shaders/celShader.frag
+	vec3 nn = normalize(fnormal);
+//	vec3 light_pos = gl_LightSource[0].position;
+//	vec3 light_dir = normalize(fposition - light_pos);
+//	vec3 eye_dir = normalize(-fposition);
+//	vec3 reflect_dir = normalize(reflect(light_dir, nn));
+//	
+//	float spec = max(dot(reflect_dir, eye_dir), 0.0);
+//	float diffuse = max(dot(-light_dir, nn), 0.0);
+//
+//	 float intensity = 0.6 * diffuse + 0.4 * spec;
+//
+// 	if (intensity > 0.9) {
+// 		intensity = 1.1;
+// 	}
+// 	else if (intensity > 0.5) {
+// 		intensity = 0.7;
+// 	}
+// 	else {
+// 		intensity = 0.5;
+//  }
+//
+//	gl_FragColor = gl_Color * intensity;
+} 
+
+	// also from lit_phong.frag
+	/*
+	vec4 albedoColor = bool(material.params & ALBEDO_TEXTURE_MASK) ? texture(albedoTexture, ftexcoord) : vec4(material.albedo, 1);
+	vec4 specularColor = bool(material.params & SPECULAR_TEXTURE_MASK) ? texture(specularTexture, ftexcoord) : vec4(material.specular, 1);
+	vec4 emissiveColor = bool(material.params & EMISSIVE_TEXTURE_MASK) ? texture(emissiveTexture, ftexcoord) : vec4(material.emissive, 1);
+
+	// set ambient light + emissive color
+	ocolor = vec4(ambientLight, 1) * albedoColor + emissiveColor;
+ 
+	float shadow = calculateShadow(fshadowcoord, shadowBias);
+
+	// set lights
+	for (int i = 0; i < numLights; i++)
+	{
+		vec3 diffuse;
+		vec3 specular;
+ 
+		float attenuation = (lights[i].type == DIRECTIONAL) ? 1 : attenuation(lights[i].position, fposition, lights[i].range);
+ 
+		phong(lights[i], fposition, fnormal, diffuse, specular);
+		ocolor += ((vec4(diffuse, 1) * albedoColor) + (vec4(specular, 1)) * specularColor) * lights[i].intensity * attenuation * shadow;
+	}
+	*/
+
+// from lit_phong.frag
+/*
 uniform struct Material
 {
 	uint params;
@@ -97,27 +152,4 @@ void phong(in Light light, in vec3 position, in vec3 normal, out vec3 diffuse, o
         specular = vec3(intensity * spotIntensity);
     }
 }
-
-void main()
-{
-	vec4 albedoColor = bool(material.params & ALBEDO_TEXTURE_MASK) ? texture(albedoTexture, ftexcoord) : vec4(material.albedo, 1);
-	vec4 specularColor = bool(material.params & SPECULAR_TEXTURE_MASK) ? texture(specularTexture, ftexcoord) : vec4(material.specular, 1);
-	vec4 emissiveColor = bool(material.params & EMISSIVE_TEXTURE_MASK) ? texture(emissiveTexture, ftexcoord) : vec4(material.emissive, 1);
-
-	// set ambient light + emissive color
-	ocolor = vec4(ambientLight, 1) * albedoColor + emissiveColor;
- 
-	float shadow = calculateShadow(fshadowcoord, shadowBias);
-
-	// set lights
-	for (int i = 0; i < numLights; i++)
-	{
-		vec3 diffuse;
-		vec3 specular;
- 
-		float attenuation = (lights[i].type == DIRECTIONAL) ? 1 : attenuation(lights[i].position, fposition, lights[i].range);
- 
-		phong(lights[i], fposition, fnormal, diffuse, specular);
-		ocolor += ((vec4(diffuse, 1) * albedoColor) + (vec4(specular, 1)) * specularColor) * lights[i].intensity * attenuation * shadow;
-	}
-}
+*/

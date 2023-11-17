@@ -56,14 +56,19 @@ namespace nc
 			if (camera) camera->SetProgram(program);
 
 			// set lights in shader program
+
 			int index = 0;
+
 			for (auto light : lights)
+
 			{
+
 				std::string name = "lights[" + std::to_string(index++) + "]";
 
+				glm::mat4 view = (camera) ? camera->view : glm::mat4(1);
 
+				light->SetProgram(program, name, view);
 
-				light->SetProgram(program, name);
 			}
 
 			// get all shader programs in the resource system
