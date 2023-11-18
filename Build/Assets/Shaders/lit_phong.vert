@@ -15,8 +15,6 @@ uniform mat4 projection;
 
 uniform mat4 shadowVP;
 
-varying vec3 normal;
-
 uniform struct Material
 {
 	uint params;
@@ -42,7 +40,4 @@ void main()
 
 	mat4 mvp = projection * view * model;
 	gl_Position = mvp * vec4(vposition, 1.0);
-
-
-
 }

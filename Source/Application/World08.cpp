@@ -9,7 +9,7 @@ namespace nc
     bool World08::Initialize()
     {
         m_scene = std::make_unique<Scene>();
-        m_scene->Load("Scenes/scene_shadow.json");
+        m_scene->Load("Scenes/scene_cell_shading.json");
         m_scene->Initialize();
 
         //create depth texture
@@ -51,6 +51,17 @@ namespace nc
 
         m_scene->Update(dt);
         m_scene->ProcessGui();
+
+        ImGui::Begin("Cel Shading");
+        ImGui::DragInt("Levels", &cLevel, 1, 1, 10);
+        ImGui::End();
+
+        auto program = GET_RESOURCE(Program, "shaders/cel_shader.prog");
+        if (program)
+        {
+            program->Use();
+            program->SetUniform("cLevel", cLevel);
+        }
 
         /*
         // set postprocess gui

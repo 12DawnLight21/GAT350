@@ -24,6 +24,9 @@ namespace nc
 		float m_speed = 5;
 		float m_blend{ 1 };
 
+		int cLevel = 6; // number of 'steps'
+		float scale_factor = 1.0 / cLevel; // divides intensity by steps
+
 		uint32_t m_params{ 0 };
 		
 		float m_refraction = 1.0f;
