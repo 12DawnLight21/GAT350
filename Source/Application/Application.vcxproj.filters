@@ -257,5 +257,8 @@
     <None Include="..\..\Build\Assets\Shaders\cel_shader.prog">
       <Filter>Shaders</Filter>
     </None>
+    <None Include="..\..\Build\Assets\Materials\cel_shading.mtrl">
+      <Filter>Materials</Filter>
+    </None>
   </ItemGroup>
 </Project>

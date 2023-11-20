@@ -7,7 +7,7 @@ INFO: Factory.h(76) Class registered: CameraComponent
 INFO: Factory.h(76) Class registered: Actor
 INFO: Main.cpp(17) Initialize Engine...
 WARNING: Texture.cpp(35) Could not create surface: textures/uilight.jpg
-WARNING: ResourceManager.h(67) Could not create resource: textures/uilight.jpg
+WARNING: ResourceManager.h(68) Could not create resource: textures/uilight.jpg
 WARNING: Program.cpp(165) Could not find uniform location: numLights
 WARNING: Program.cpp(165) Could not find uniform location: ambientLight
 WARNING: Program.cpp(165) Could not find uniform location: material.params

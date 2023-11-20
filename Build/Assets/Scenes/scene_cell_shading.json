@@ -83,7 +83,7 @@
         {
           "type": "ModelComponent",
           "modelName": "models/ogre.obj",
-          "materialName": "Materials/shrek.mtrl",
+          "materialName": "Materials/cel_shading.mtrl",
           "cullface": "back"
         }
       ]

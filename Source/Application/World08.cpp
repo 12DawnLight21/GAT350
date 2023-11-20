@@ -12,6 +12,10 @@ namespace nc
         m_scene->Load("Scenes/scene_cell_shading.json");
         m_scene->Initialize();
 
+        m_editor = std::make_unique<Editor>();
+
+
+
         //create depth texture
         auto texture = std::make_shared<Texture>();
         texture->CreateDepthTexture(1024, 1024);
@@ -50,7 +54,8 @@ namespace nc
         ENGINE.GetSystem<Gui>()->BeginFrame();
 
         m_scene->Update(dt);
-        m_scene->ProcessGui();
+
+        m_editor->ProcessGui(m_scene.get());
 
         ImGui::Begin("Cel Shading");
         ImGui::DragInt("Levels", &cLevel, 1, 1, 10);
