@@ -6,6 +6,10 @@ INFO: Factory.h(76) Class registered: CameraController
 INFO: Factory.h(76) Class registered: CameraComponent
 INFO: Factory.h(76) Class registered: Actor
 INFO: Main.cpp(17) Initialize Engine...
+INFO: Factory.h(84) Prototype Class registered: Camera
+INFO: Factory.h(84) Prototype Class registered: Light
+INFO: Factory.h(84) Prototype Class registered: Sphere
+INFO: Factory.h(84) Prototype Class registered: Cube
 WARNING: Texture.cpp(35) Could not create surface: textures/uilight.jpg
 WARNING: ResourceManager.h(68) Could not create resource: textures/uilight.jpg
 WARNING: Program.cpp(165) Could not find uniform location: numLights
@@ -37,3 +41,19 @@ WARNING: Program.cpp(165) Could not find uniform location: lights[0].range
 WARNING: Program.cpp(165) Could not find uniform location: lights[0].innerAngle
 WARNING: Program.cpp(165) Could not find uniform location: lights[0].outerAngle
 WARNING: Program.cpp(165) Could not find uniform location: shadowBias
+WARNING: Program.cpp(165) Could not find uniform location: lights[1].type
+WARNING: Program.cpp(165) Could not find uniform location: lights[1].position
+WARNING: Program.cpp(165) Could not find uniform location: lights[1].direction
+WARNING: Program.cpp(165) Could not find uniform location: lights[1].color
+WARNING: Program.cpp(165) Could not find uniform location: lights[1].intensity
+WARNING: Program.cpp(165) Could not find uniform location: lights[1].range
+WARNING: Program.cpp(165) Could not find uniform location: lights[1].innerAngle
+WARNING: Program.cpp(165) Could not find uniform location: lights[1].outerAngle
+WARNING: Program.cpp(165) Could not find uniform location: lights[1].type
+WARNING: Program.cpp(165) Could not find uniform location: lights[1].position
+WARNING: Program.cpp(165) Could not find uniform location: lights[1].direction
+WARNING: Program.cpp(165) Could not find uniform location: lights[1].color
+WARNING: Program.cpp(165) Could not find uniform location: lights[1].intensity
+WARNING: Program.cpp(165) Could not find uniform location: lights[1].range
+WARNING: Program.cpp(165) Could not find uniform location: lights[1].innerAngle
+WARNING: Program.cpp(165) Could not find uniform location: lights[1].outerAngle

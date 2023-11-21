@@ -1,10 +1,18 @@
 #include "Editor.h"
 #include "Scene.h"
+#include "Components/CameraComponent.h"
 
 namespace nc
 {
+	void Editor::Update()
+	{
+		if (ImGui::IsKeyPressed(ImGuiKey_GraveAccent)) m_active = !m_active; // ` key
+	}
+
 	void Editor::ProcessGui(Scene* scene)
 	{
+		if (!m_active) return;
+
 		// show resources
 		ImGui::Begin("Resources");
 		auto resources = GET_RESOURCES(Resource);
@@ -24,6 +32,77 @@ namespace nc
 		ImGui::Separator();
 
 		// show actors
+		ImGui::BeginChild("Actors");
+		// actor controls
+		if (ImGui::BeginPopupContextWindow())
+		{
+			auto cameras = scene->GetComponents<CameraComponent>();
+			auto camera = (!cameras.empty()) ? cameras[0] : nullptr;
+
+			if (ImGui::MenuItem("Create Empty")) 
+			{
+				auto actor = CREATE_CLASS(Actor);
+				actor->name = StringUtils::CreateUnique(actor->GetClassName()); 
+				actor->Initialize(); 
+				m_selected = actor.get(); 
+				scene->Add(std::move(actor)); 
+			}
+			if (ImGui::MenuItem("Sphere")) 
+			{
+				auto actor = CREATE_CLASS_BASE(Actor, "Sphere");
+				actor->name = StringUtils::CreateUnique(actor->name); 
+				if (camera)
+				{
+					//spawns actor in front of camera
+					actor->transform.position = camera->m_owner->transform.position + camera->m_owner->transform.Forward() * 3.0f;
+				} 
+				actor->Initialize();  
+				m_selected = actor.get();  
+				scene->Add(std::move(actor));  
+			} 
+
+			if (ImGui::MenuItem("Cube"))
+			{
+				auto actor = CREATE_CLASS_BASE(Actor, "Cube");
+				actor->name = StringUtils::CreateUnique(actor->name);  
+				actor->Initialize(); 
+				if (camera)
+				{
+					//spawns actor in front of camera
+					actor->transform.position = camera->m_owner->transform.position + camera->m_owner->transform.Forward() * 3.0f; 
+				}
+				m_selected = actor.get();  
+				scene->Add(std::move(actor));  
+			}
+			if (ImGui::MenuItem("Camera")) 
+			{
+				auto actor = CREATE_CLASS_BASE(Actor, "Camera");
+				actor->name = StringUtils::CreateUnique(actor->name); 
+				actor->Initialize(); 
+				if (camera)
+				{
+					//spawns actor in front of camera
+					actor->transform.position = camera->m_owner->transform.position + camera->m_owner->transform.Forward() * 3.0f; 
+				}
+				m_selected = actor.get(); 
+				scene->Add(std::move(actor)); 
+			}
+			if (ImGui::MenuItem("Light")) 
+			{
+				auto actor = CREATE_CLASS_BASE(Actor, "Light");
+				actor->name = StringUtils::CreateUnique(actor->name); 
+				actor->Initialize(); if (camera)
+				{
+					//spawns actor in front of camera
+					actor->transform.position = camera->m_owner->transform.position + camera->m_owner->transform.Forward() * 3.0f; 
+				}
+				m_selected = actor.get(); 
+				scene->Add(std::move(actor)); 
+			}
+
+			ImGui::EndPopup();
+		}
+
 		for (auto& actor : scene->m_actors)
 		{
 			if (ImGui::Selectable(actor->name.c_str(), actor.get() == m_selected))
@@ -31,6 +110,7 @@ namespace nc
 				m_selected = actor.get();
 			}
 		}
+		ImGui::EndChild();
 		ImGui::End();
 
 		// show inspector

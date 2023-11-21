@@ -9,6 +9,7 @@ namespace nc
     bool World08::Initialize()
     {
         m_scene = std::make_unique<Scene>();
+        m_scene->Load("Scenes/scene_editor.json");
         m_scene->Load("Scenes/scene_cell_shading.json");
         m_scene->Initialize();
 
@@ -55,6 +56,7 @@ namespace nc
 
         m_scene->Update(dt);
 
+        m_editor->Update();
         m_editor->ProcessGui(m_scene.get());
 
         ImGui::Begin("Cel Shading");
